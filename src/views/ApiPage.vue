@@ -1,16 +1,18 @@
 <template>
     <div id="api">
-      <p>api</p>
+      <ApiComponent />
       <FooterComponent />
     </div>
 </template>
 
 <script>
+import ApiComponent from '../components/ApiComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
 
   export default {
     name: 'ApiPage',
     components: {
+      ApiComponent,
       FooterComponent,
     }
   }
