@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    name: "NavigationComponent",
+  name: "NavigationComponent",
 };
 </script>
 
@@ -22,13 +22,20 @@ export default {
 nav ul {
   display: flex;
   list-style: none;
-  padding: 0;
-  justify-content: space-around;
+  justify-content: center;
   padding: 1rem;
   margin: 0;
   background-color: #f8f9fa;
 }
 nav ul li {
-  margin-right: 10px;
+  margin-right: 5%;
+}
+nav ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+nav ul li a:hover {
+  color: gray;
 }
 </style>

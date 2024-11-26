@@ -35,15 +35,20 @@ export default {
     margin-top: 2rem;
 }
 .image{
-    max-width: 20%;
+    width: 20%;
     height: auto;
-    margin-left: 15%;
+    margin-left: 12.5%;
+    border: solid gainsboro;
+    border-radius: 5px;
 }
 .paragraphe{
     font-size: 1.2rem;
     color: #333;
-    width: 50%;
-    margin: 1rem 0;
+    width: 40%;
+    margin: 1rem 5%;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 5px 5px 30px grey
 }
 
 </style>
