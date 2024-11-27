@@ -1,16 +1,18 @@
 <template>
     <div id="contact">
-      <p>contact</p>
+      <FormulaireComponent />
       <FooterComponent />
     </div>
 </template>
 
 <script>
+import FormulaireComponent from '@/components/FormulaireComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
 
   export default {
     name: 'ContactPage',
     components: {
+      FormulaireComponent,
       FooterComponent,
     }
   }

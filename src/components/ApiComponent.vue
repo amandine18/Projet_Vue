@@ -5,16 +5,25 @@
                 <h3>Contacter une API en GET</h3>
                 <ul>
                     <li>
-                        <label for="url">URL :</label>
-                        <input type="text" id="url" v-model="apiUrl" />
+                        <div class="field">
+                            <label for="url">URL :</label>
+                            <input type="text" id="url" v-model="apiUrl" @input="clearError('errorUrl')" />
+                        </div>
+                        <div class="erreur">
+                            <span class="error" v-if="errorUrl">{{ errorUrl }}</span>
+                        </div>
                     </li>
                     <li>
-                        <label for="methode">Méthode :</label>
-                        <input type="text" id="methode" v-model="apiMethod" />
+                        <div class="field">
+                            <label for="methode">Méthode :</label>
+                            <input type="text" id="methode" v-model="apiMethod" />
+                        </div>
                     </li>
                     <li>
-                        <label for="param">Paramètre :</label>
-                        <input type="text" id="param" v-model="apiParam" />
+                        <div class="field">
+                            <label for="param">Paramètre :</label>
+                            <input type="text" id="param" v-model="apiParam" />
+                        </div>
                     </li>
                 </ul>
                 <div class="button">
@@ -39,10 +48,32 @@ export default {
             apiMethod: 'GET', // Par défaut GET
             apiParam: '',
             apiResponse: null, // Stocke la réponse de l'API
+            errorUrl: null,
         };
     },
     methods: {
+        validateForm() {
+            let isValid = true;
+            this.errorUrl = null;
+
+            if (!this.apiUrl){
+                this.errorUrl = "L'URL est requise";
+                isValid = false;
+            }
+
+            return isValid;
+        },
+        clearError(field) {
+            // Supprime l'erreur du champ correspondant dès qu'un changement est détecté
+            if (field === 'errorUrl') {
+                this.errorUrl = null;
+            }
+        },
         async fetchApi() {
+            if (!this.validateForm()) {
+                return; // Arrête la fonction si la validation échoue
+            }
+            
             try {
                 let url = this.apiUrl;
                 if (this.apiParam) {
@@ -67,8 +98,8 @@ export default {
 
 <style>
 form {
-  margin: 2rem 21% 0 25%;
-  width: 50%;
+  margin: 2rem auto;
+  width: 60%;
   padding: 2%;
   border: 1px solid #ccc;
   border-radius: 1em;
@@ -94,9 +125,8 @@ form {
     border-radius: 1em;
 }
 form h3{
-    margin: 0 11.5%;
+    margin: 0 12.5%;
     padding-bottom: 1rem;
-    width: 77%;
     text-align: left;
 }
 
@@ -108,6 +138,8 @@ ul {
 
 form li{
   margin-top: 1em;
+  margin-left: 12.5%;
+  display: flex; /* Utiliser Flexbox */
 }
 
 label {
@@ -118,6 +150,7 @@ label {
 
 input{
   font: 1em sans-serif;
+  flex: 0.75;
 }
 
 input:focus {
@@ -125,12 +158,11 @@ input:focus {
 }
 
 .button {
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
 button {
     padding: 5px;
     width: 100px;
-    margin-right: 12.5%;
 }
 </style>
