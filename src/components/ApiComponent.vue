@@ -138,6 +138,7 @@ export default {
 
             let requete = new XMLHttpRequest();
             requete.onreadystatechange = () => {
+                console.log(requete.readyState)
                 if (requete.readyState === XMLHttpRequest.DONE) {
                     if (requete.status === 200 || requete.status === 201) {
                         try {
@@ -149,7 +150,7 @@ export default {
                         }
                     } else {
                         console.error(`HTTP Error: ${requete.status} - ${requete.statusText}`);
-                        console.log(requete.readyState);
+                        //console.log(requete.readyState);
                         this.apiResponse = `Erreur HTTP: ${requete.status} - ${requete.statusText}`;
                     }
                 }
@@ -161,7 +162,9 @@ export default {
                 requete.setRequestHeader("Content-Type", "application/json");
                 requete.send(JSON.stringify(payload));
             } else {
+                console.log('test')
                 requete.send();
+                
             }
 
 
