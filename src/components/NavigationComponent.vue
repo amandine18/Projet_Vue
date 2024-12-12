@@ -5,6 +5,7 @@
         <li><router-link to="/">Accueil</router-link></li>
         <li><router-link to="/contact">Contact</router-link></li>
         <li><router-link to="/api">API</router-link></li>
+        <li><router-link to="/bonus">Bonus</router-link></li>
       </ul>
     </nav>
     <!-- Contenu des routes -->

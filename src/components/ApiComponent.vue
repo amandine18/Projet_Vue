@@ -5,7 +5,7 @@
                 <h3>Contacter une API en GET</h3>
                 <ul>
                     <li>
-                        <div class="field">
+                        <div class="field" id="other">
                             <label for="url">URL :</label>
                             <input type="text" id="url" v-model="apiUrl" @input="handleUrlChange()"/>
                         </div>
@@ -14,7 +14,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="field">
+                        <div class="field" id="other">
                             <label for="methode">Méthode :</label>
                             <select id="methode" v-model="apiMethod">
                                 <option value="GET">GET</option>
@@ -25,7 +25,7 @@
                         </div>
                     </li>
                     <li v-if="apiMethod !== 'GET' && apiMethod !== 'DELETE'">
-                        <div class="field">
+                        <div class="field" id="param">
                             <label for="param">Paramètre :</label>
                             <textarea id="param" v-model="apiParam" @input="handleMethodChange()" />
                         </div>
@@ -105,40 +105,12 @@ export default {
             }
         },
         async fetchApi() {
-            // if (!this.validateForm()) {
-            //     return; //Arrête la fonction si la validation échoue
-            // }
-            // let url = this.apiUrl
-            // let options = { method: this.apiMethod };
-            // if (this.apiMethod !== 'GET') {
-            //     options.headers = { 'Content-Type': 'application/json' }, {'accept': 'application/json'}, {'X-API-KEY': this.apiKey} ;
-            //     options.body = JSON.stringify(JSON.parse(this.apiParam));
-            //     console.log('test3')
-            // }
-
-            // const response = await fetch(url, options);
-            // console.log('test5')
-            // if (!response.ok) {
-            //     throw new Error(`Erreur HTTP : ${response.status}`);
-            // }
-
-            // const data = await response.json();
-            // this.apiResponse = JSON.stringify(response, null, 2); 
-            // try {
-            
-            // } catch (error) {
-            //     console.error(error);
-            //     // this.apiResponse = "Aucune réponse de l'API, réessayez avec d'autres informations";
-            //     this.apiResponse = error;
-            // }
-
             let url = this.apiUrl;
             let option = this.apiMethod;
             let param = this.apiParam;
 
             let requete = new XMLHttpRequest();
             requete.onreadystatechange = () => {
-                console.log(requete.readyState)
                 if (requete.readyState === XMLHttpRequest.DONE) {
                     if (requete.status === 200 || requete.status === 201) {
                         try {
@@ -150,7 +122,6 @@ export default {
                         }
                     } else {
                         console.error(`HTTP Error: ${requete.status} - ${requete.statusText}`);
-                        //console.log(requete.readyState);
                         this.apiResponse = `Erreur HTTP: ${requete.status} - ${requete.statusText}`;
                     }
                 }
@@ -162,30 +133,9 @@ export default {
                 requete.setRequestHeader("Content-Type", "application/json");
                 requete.send(JSON.stringify(payload));
             } else {
-                console.log('test')
                 requete.send();
                 
             }
-
-
-            // try {
-            //     const config = {
-            //         method: this.apiMethod,
-            //         url: this.apiUrl,
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         }
-            //     };
-
-            //     if (this.apiMethod !== 'GET' && this.apiMethod !== 'DELETE') {
-            //         config.data = JSON.parse(this.apiParam);
-            //     }
-
-            //     const response = await axios(config);
-            //     this.apiResponse = JSON.stringify(response.data, null, 2);
-            // } catch (error) {
-            //     this.apiResponse = `Erreur: ${error.response?.data || error.message}`;
-            // }
         },
     },
 }
@@ -259,5 +209,38 @@ input:focus {
 button {
     padding: 5px;
     width: 100px;
+}
+
+/* Styles responsive */
+@media screen and (max-width: 1350px) {
+    form {
+        width: 90%;
+    }
+    #param {
+        display: block;
+    }
+    #param label {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+    #param textarea {
+        width: 88%;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    #other {
+        display: block;
+    }
+    #other label {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+    #other input,  #other input{
+        align-items: left;
+        width: 88%;
+    } 
 }
 </style>
