@@ -58,10 +58,13 @@ export default {
     toggleSection(section) {
       if (section === 'section1') {
         this.isSection1Open = !this.isSection1Open;
+        if (this.isSection1Open) {
+          this.created();   //Appel l'API lors de l'ouverture de la section
+        }
       } else if (section === 'section2') {
         this.isSection2Open = !this.isSection2Open;
         if (this.isSection2Open) {
-          this.fetchChuckNorrisJoke(); //Appel l'API lors de l'ouverture de la section
+          this.fetchChuckNorrisJoke();
         }
       }
     },
