@@ -47,45 +47,46 @@
 export default {
   data() {
     return {
-      isSection1Open: false, // État pour la section 1
-      isSection2Open: false, // État pour la section 2
-      users: [],     // utilisateurs de l'API
-      joke: '',   // Blague obtenue depuis l'API Chuck Norris
+      isSection1Open: false, //État pour la section 1
+      isSection2Open: false, //État pour la section 2
+      users: [],
+      joke: '',
     };
   },
   methods: {
-    // Méthode pour basculer l'état d'une section spécifique
+    //Méthode pour basculer l'état d'une section spécifique
     toggleSection(section) {
       if (section === 'section1') {
         this.isSection1Open = !this.isSection1Open;
       } else if (section === 'section2') {
         this.isSection2Open = !this.isSection2Open;
         if (this.isSection2Open) {
-          this.fetchChuckNorrisJoke(); // Appeler l'API lors de l'ouverture de la section
+          this.fetchChuckNorrisJoke(); //Appel l'API lors de l'ouverture de la section
         }
       }
     },
-    // Méthode pour récupérer une blague depuis l'API Chuck Norris
+    //Méthode pour récupérer une blague depuis l'API Chuck Norris
     fetchChuckNorrisJoke() {
       fetch('https://api.chucknorris.io/jokes/random')
         .then(response => response.json())
         .then(data => {
-          this.joke = data.value; // Stocke la blague dans la variable `joke`
+          this.joke = data.value; //Stocke la blague dans la variable `joke`
         })
         .catch(error => {
           console.error("Erreur lors de l'appel à l'API Chuck Norris", error);
         });
     },
-  },
-  created() {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(data => {
-        this.users = data; 
-      })
-      .catch(error => {
-        console.error("Erreur, impossible de récupérer les utilisateurs", error);
-      });
+    //Méthode pour récupérer les utilisateurs depuis l'API jsonplaceholder
+    created() {
+      fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(data => {
+          this.users = data; 
+        })
+        .catch(error => {
+          console.error("Erreur, impossible de récupérer les utilisateurs", error);
+        });
+    },
   },
 }
 </script>
@@ -182,7 +183,7 @@ table thead {
   }
   table td {
     display: flex;
-    justify-content: center; /* Centre le contenu dans chaque cellule */
+    justify-content: center;
     text-align: center;
     border: 1px solid black;
   }

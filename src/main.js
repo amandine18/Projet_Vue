@@ -8,12 +8,12 @@ import BonusPage from './views/BonusPage.vue';
 
 Vue.config.productionTip = false;
 
-// Enregistrement de Vue Router comme plugin
+//Enregistrement de Vue Router comme plugin
 Vue.use(VueRouter);
 
-// Création de l'instance du routeur
+//Création de l'instance du routeur
 const router = new VueRouter({
-  mode: 'history', // Permet d'utiliser des URLs sans hash (#)
+  mode: 'history', //Permet d'utiliser des URLs sans hash (#)
   routes: [
     { path: '/', component: HomePage },
     { path: '/contact', component: ContactPage },
@@ -22,8 +22,8 @@ const router = new VueRouter({
   ]
 });
 
-// Création de l'instance Vue
+//Création de l'instance Vue
 new Vue({
   render: h => h(App),
-  router // Ajout du routeur à l'application
+  router //Ajout du routeur à l'application
 }).$mount('#app');

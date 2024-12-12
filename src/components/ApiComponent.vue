@@ -10,6 +10,7 @@
                             <input type="text" id="url" v-model="apiUrl" @input="handleUrlChange()"/>
                         </div>
                         <div class="erreur">
+                            <!-- Utilisation de v-if pour afficher l'erreur -->
                             <span class="error" v-if="errorUrl">{{ errorUrl }}</span>
                         </div>
                     </li>
@@ -24,6 +25,7 @@
                             </select>
                         </div>
                     </li>
+                    <!-- Utilisation de v-if pour gérer les cas -->
                     <li v-if="apiMethod !== 'GET' && apiMethod !== 'DELETE'">
                         <div class="field" id="param">
                             <label for="param">Paramètre :</label>
@@ -49,14 +51,13 @@
 </template>
 
 <script>
-// import axios from 'axios';
 export default {
     data() {
         return {
             apiUrl: '',
-            apiMethod: 'GET', // Par défaut GET
+            apiMethod: 'GET', //Par défaut GET
             apiParam: '',
-            apiResponse: null, // Stocke la réponse de l'API
+            apiResponse: null,
             errorUrl: null,
             errorParam: null,
         };
@@ -80,7 +81,7 @@ export default {
             return isValid;
         },
         clearError(field) {
-            // Supprime l'erreur du champ correspondant dès qu'un changement est détecté
+            //Supprime l'erreur du champ correspondant dès qu'un changement est détecté
             if (field === 'errorUrl') {
                 this.errorUrl = null;
             }
@@ -89,7 +90,7 @@ export default {
             }
         },
         handleUrlChange() {
-            this.apiResponse = null; // Réinitialise la réponse lorsque l'URL est modifiée
+            this.apiResponse = null; //Réinitialise la réponse lorsque l'URL est modifiée
             this.clearError('errorUrl');
         },
         handleMethodChange() {
@@ -114,7 +115,6 @@ export default {
                 if (requete.readyState === XMLHttpRequest.DONE) {
                     if (requete.status === 200 || requete.status === 201) {
                         try {
-                            // Parse and set the API response to the variable
                             this.apiResponse = JSON.parse(requete.responseText);
                         } catch (error) {
                             console.error("JSON Parsing Error:", error.message);

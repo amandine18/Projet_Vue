@@ -59,6 +59,7 @@ export default {
             let isValid = true;
             this.errors = { nom: null, email: null, message: null };
 
+            //Gestion des différentes erreurs
             if (!this.form.nom){
                 this.errors.nom = "Le nom est requis";
                 isValid = false;
@@ -78,7 +79,7 @@ export default {
             return isValid;
         },
         clearError(field) {
-            // Supprime l'erreur du champ correspondant dès qu'un changement est détecté
+            //Supprime l'erreur du champ correspondant dès qu'un changement est détecté
             if (this.errors[field]) {
                 this.errors[field] = null;
             }
